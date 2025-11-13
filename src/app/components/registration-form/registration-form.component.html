@@ -1,0 +1,116 @@
+<div class="registration-section" id="registrazione">
+  <h2>Registrati all'Evento</h2>
+  <p class="registration-subtitle">La registrazione è obbligatoria per partecipare all'evento</p>
+
+  <!-- Messaggio di successo -->
+  <div class="alert alert-success" *ngIf="submitSuccess">
+    ✓ Registrazione completata con successo!
+  </div>
+
+  <!-- Messaggio di errore -->
+  <div class="alert alert-error" *ngIf="submitError">
+    ✗ {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+    
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome *</label>
+      <input 
+        type="text" 
+        id="nome" 
+        formControlName="nome"
+        [class.error]="registrationForm.get('nome')?.invalid && registrationForm.get('nome')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('nome')?.invalid && registrationForm.get('nome')?.touched">
+        {{ getErrorMessage('nome') }}
+      </span>
+    </div>
+
+    <!-- Cognome -->
+    <div class="form-group">
+      <label for="cognome">Cognome *</label>
+      <input 
+        type="text" 
+        id="cognome" 
+        formControlName="cognome"
+        [class.error]="registrationForm.get('cognome')?.invalid && registrationForm.get('cognome')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('cognome')?.invalid && registrationForm.get('cognome')?.touched">
+        {{ getErrorMessage('cognome') }}
+      </span>
+    </div>
+
+    <!-- Età -->
+    <div class="form-group">
+      <label for="eta">Età *</label>
+      <input 
+        type="number" 
+        id="eta" 
+        formControlName="eta"
+        [class.error]="registrationForm.get('eta')?.invalid && registrationForm.get('eta')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('eta')?.invalid && registrationForm.get('eta')?.touched">
+        {{ getErrorMessage('eta') }}
+      </span>
+    </div>
+
+    <!-- Codice Fiscale -->
+    <div class="form-group">
+      <label for="codiceFiscale">Codice Fiscale *</label>
+      <input 
+        type="text" 
+        id="codiceFiscale" 
+        formControlName="codiceFiscale"
+        placeholder="es. RSSMRA80A01H501U"
+        maxlength="16"
+        [class.error]="registrationForm.get('codiceFiscale')?.invalid && registrationForm.get('codiceFiscale')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('codiceFiscale')?.invalid && registrationForm.get('codiceFiscale')?.touched">
+        {{ getErrorMessage('codiceFiscale') }}
+      </span>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email *</label>
+      <input 
+        type="email" 
+        id="email" 
+        formControlName="email"
+        placeholder="esempio@email.com"
+        [class.error]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+        {{ getErrorMessage('email') }}
+      </span>
+    </div>
+
+    <!-- Telefono -->
+    <div class="form-group">
+      <label for="telefono">Numero di Telefono *</label>
+      <input 
+        type="tel" 
+        id="telefono" 
+        formControlName="telefono"
+        placeholder="+39 333 1234567"
+        [class.error]="registrationForm.get('telefono')?.invalid && registrationForm.get('telefono')?.touched"
+      >
+      <span class="error-message" *ngIf="registrationForm.get('telefono')?.invalid && registrationForm.get('telefono')?.touched">
+        {{ getErrorMessage('telefono') }}
+      </span>
+    </div>
+
+    <!-- Submit Button -->
+    <button 
+      type="submit" 
+      class="submit-btn"
+      [disabled]="isSubmitting"
+    >
+      {{ isSubmitting ? 'Invio in corso...' : 'Registrati' }}
+    </button>
+
+    <p class="form-note">* Campi obbligatori</p>
+  </form>
+</div>
